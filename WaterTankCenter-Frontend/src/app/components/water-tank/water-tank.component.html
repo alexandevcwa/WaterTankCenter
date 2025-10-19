@@ -1,0 +1,69 @@
+<div class="tank-panel">
+          <div class="card">
+            <div class="card-header">
+              <h3>Tanque de Agua Principal</h3>
+            </div>
+            <div class="card-block">
+
+              <!-- Contenedor del Tanque -->
+              <div class="tank-container">
+                <div class="tank">
+                  <!-- Agua animada -->
+                  <div class="water"
+                       [style.height.%]="waterLevel"
+                       [style.background-color]="getWaterColor()"
+                       [class.filling]="isFillingAnimation">
+                    <!-- Efecto de ondas -->
+                    <div class="wave wave1"></div>
+                    <div class="wave wave2"></div>
+
+                    <!-- Porcentaje dentro del agua -->
+                    <div class="water-percentage">
+                      {{ waterLevel }}%
+                    </div>
+                  </div>
+
+                  <!-- Marcadores de nivel -->
+                  <div class="level-markers">
+                    <div class="marker" style="bottom: 75%">
+                      <span>75%</span>
+                    </div>
+                    <div class="marker" style="bottom: 50%">
+                      <span>50%</span>
+                    </div>
+                    <div class="marker" style="bottom: 25%">
+                      <span>25%</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Información del tanque -->
+                <div class="tank-info">
+                  <div class="info-item">
+                    <span class="info-label">Volumen Actual:</span>
+                    <span class="info-value">{{ waterTank.currentVolume }} L</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">Capacidad Total:</span>
+                    <span class="info-value">{{ waterTank.maximumVolume }} L</span>
+                  </div>
+
+                  <div class="info-item">
+                    <span class="info-label">Radio:</span>
+                    <span class="info-value">{{ waterTank.radio }} m</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">Altura:</span>
+                    <span class="info-value">{{ waterTank.hight }} m</span>
+                  </div>
+                  <div class="info-item">
+                    <span class="info-label">Estado:</span>
+                    <span class="badge" [ngClass]="getAlertClass()">
+                      {{ getTankStatus() }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

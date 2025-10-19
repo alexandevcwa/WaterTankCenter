@@ -1,0 +1,21 @@
+<header class="header header-8">
+  <div class="branding">
+    <a href="#" class="nav-link">
+      <span class="title">{{ title }}</span>
+    </a>
+  </div>
+  <div class="header-actions">
+    <clr-dropdown>
+      <button
+        class="nav-icon"
+        clrDropdownTrigger
+        aria-label="toggle settings menu"
+      >
+        <cds-icon shape="angle" direction="down"></cds-icon>
+      </button>
+      <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+        <a clrDropdownItem>Acerca del Proyecto</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+  </div>
+</header>

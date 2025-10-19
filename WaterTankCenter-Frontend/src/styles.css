@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@clr/ui/clr-ui.min.css';
+@import '@cds/core/global.min.css';
+@import '@cds/core/styles/theme.dark.min.css';
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Clarity City', 'Avenir Next', Helvetica, Arial, sans-serif;
+}

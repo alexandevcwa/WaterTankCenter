@@ -1,0 +1,19 @@
+waterPump:
+  inputVolumeThresholdInM3PerSecond: 3.0
+
+water-tank:
+  radio: 5
+  hight: 6
+  min-volume-in-percent: 25.0
+
+spring:
+  application:
+    name: WaterTankCenter-Backend
+
+logging:
+  level:
+    com:
+      miumg:
+        wtcenter:
+          scheduled: DEBUG
+          service: DEBUG

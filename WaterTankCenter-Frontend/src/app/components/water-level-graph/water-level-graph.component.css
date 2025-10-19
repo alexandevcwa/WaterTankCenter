@@ -1,0 +1,3 @@
+::ng-deep .ngx-charts text {
+  fill: #FFFFFF !important; /* texto blanco */
+}

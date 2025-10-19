@@ -1,0 +1,45 @@
+<div class="card chart-card">
+            <div class="card-header">
+              <h3>Nivel de Agua en Tiempo Real</h3>
+            </div>
+            <div class="card-block">
+              <div class="chart-info">
+                <div class="alert" [ngClass]="getAlertClass()" role="alert">
+                  <div class="alert-items">
+                    <div class="alert-item static">
+                      <div class="alert-icon-wrapper">
+                        <cds-icon
+                          class="alert-icon"
+                          shape="info-circle"
+                        ></cds-icon>
+                      </div>
+                      <span class="alert-text">
+                        {{ getTankStatus() }} - Nivel actual: {{ waterLevel }}%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-container">
+                <ngx-charts-line-chart
+                  [scheme]="colorScheme"
+                  [results]="waterLevelHistory"
+                  [gradient]="true"
+                  [xAxis]="xAxis"
+                  [yAxis]="yAxis"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel"
+                  [yAxisLabel]="'Nivel (%)'"
+                  [timeline]="timeline"
+                  [animations]="animations"
+                  [autoScale]="true"
+                  [yScaleMin]="0"
+                  [yScaleMax]="100"
+
+                >
+                </ngx-charts-line-chart>
+              </div>
+            </div>
+          </div>

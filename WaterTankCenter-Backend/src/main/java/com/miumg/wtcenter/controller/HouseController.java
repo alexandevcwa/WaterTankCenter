@@ -3,6 +3,7 @@ package com.miumg.wtcenter.controller;
 import com.miumg.wtcenter.dto.HouseDto;
 import com.miumg.wtcenter.service.WaterTankHouseService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +21,8 @@ public class HouseController {
     private final WaterTankHouseService waterTankHouseService;
 
     @PostMapping("/houses")
-    public ResponseEntity<Void> postHouse(@RequestBody HouseDto houseDto){
+    public ResponseEntity<Void> postHouse(@Valid @RequestBody HouseDto houseDto){
         waterTankHouseService.addHouse(houseDto);
         return ResponseEntity.ok().build();
-    }
-
-    public List<HouseDto> getAll(){
-        return null;
     }
 }

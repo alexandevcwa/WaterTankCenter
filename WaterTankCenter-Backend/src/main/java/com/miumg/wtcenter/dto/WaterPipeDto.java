@@ -34,11 +34,7 @@ public class WaterPipeDto {
     @Getter @Setter
     private double frictionFactor = 0.03;
 
-    /**
-     * Constructs a new PipeDto instance with the specified diameter and length.
-     * @param diameter the diameter of the pipe in meters
-     * @param length the length of the pipe in meters
-     */
+
     public WaterPipeDto(double diameter, double length) {
         this.diameter = diameter;
         this.length = length;

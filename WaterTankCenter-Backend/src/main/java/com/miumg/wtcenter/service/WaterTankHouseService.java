@@ -21,7 +21,8 @@ public class WaterTankHouseService {
     private static int housesRegistered = 0;
 
     public void addHouse(HouseDto houseDto) {
-        houseDto.setId(housesRegistered++);
+        housesRegistered++;
+        houseDto.setId(housesRegistered);
         executor.submit(new WaterTankHouseLink(houseDto, wtcl, messagingTemplate));
     }
 }

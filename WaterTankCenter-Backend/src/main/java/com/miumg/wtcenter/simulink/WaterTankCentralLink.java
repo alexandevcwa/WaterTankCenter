@@ -3,12 +3,10 @@ package com.miumg.wtcenter.simulink;
 import lombok.Getter;
 import lombok.Synchronized;
 
-import java.util.concurrent.atomic.AtomicReference;
-
 /**
  * Represents a water tank with a maximum and minimum volume.
  */
-public class TankLink {
+public class WaterTankCentralLink {
 
     /**
      * The maximum volume of the tank.
@@ -34,7 +32,7 @@ public class TankLink {
     private final double radio;
 
     /**
-     * The hight of the tank.
+     * The height of the tank.
      */
     @Getter
     private final double hight;
@@ -44,12 +42,12 @@ public class TankLink {
      * Constructs a new TankLink instance with the specified maximum volume and minimum percentage of the volume.
      *
      * @param radio the radio of the tank, in meters
-     * @param hight the hight of the tank, in meters
+     * @param hight the height of the tank, in meters
      * @param minimumPercentage the minimum percentage of the maximum volume allowed; must be between 0 and 100
      * @throws RuntimeException if the maximum volume is less than or equal to zero
      * @throws RuntimeException if the minimum percentage is outside the range [0, 100]
      */
-    public TankLink(double radio, double hight, double minimumPercentage) {
+    public WaterTankCentralLink(double radio, double hight, double minimumPercentage) {
         if (radio <= 0) throw new RuntimeException("Radio must be greater than zero");
         if (minimumPercentage < 0 || minimumPercentage > 100)
             throw new RuntimeException("Minimum percentage must be between 0 and 100");

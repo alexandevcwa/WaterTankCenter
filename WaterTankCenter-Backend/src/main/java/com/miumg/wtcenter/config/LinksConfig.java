@@ -1,6 +1,6 @@
 package com.miumg.wtcenter.config;
 
-import com.miumg.wtcenter.simulink.TankLink;
+import com.miumg.wtcenter.simulink.WaterTankCentralLink;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class LinksConfig {
     private double minVolumeInPercent;
 
     @Bean
-    public TankLink tankLink() {
-        return new TankLink(radio,hight,minVolumeInPercent);
+    public WaterTankCentralLink tankLink() {
+        return new WaterTankCentralLink(radio,hight,minVolumeInPercent);
     }
 }

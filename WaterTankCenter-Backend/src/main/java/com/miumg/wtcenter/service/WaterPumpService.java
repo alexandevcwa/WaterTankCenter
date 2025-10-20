@@ -1,6 +1,6 @@
 package com.miumg.wtcenter.service;
 
-import com.miumg.wtcenter.simulink.TankLink;
+import com.miumg.wtcenter.simulink.WaterTankCentralLink;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ public class WaterPumpService {
      * the tank's current volume, ensuring thread-safe operations while managing water
      * levels. It is a core dependency for services controlling water distribution.
      */
-    private final TankLink tankLink;
+    private final WaterTankCentralLink waterTankCentralLink;
 
     /**
      * The volume threshold to start saving water (as a percentage of max volume).
@@ -49,7 +49,7 @@ public class WaterPumpService {
 
     @PostConstruct
     public void postConstruct() {
-        saveVolumeThreshold = tankLink.getMaximumVolume() * SAVE_VOLUME_THRESHOLD_VOLUME;
+        saveVolumeThreshold = waterTankCentralLink.getMaximumVolume() * SAVE_VOLUME_THRESHOLD_VOLUME;
     }
 
     /**
@@ -73,16 +73,16 @@ public class WaterPumpService {
      * to determine whether the pump is actively running, preventing simultaneous pump operations.
      */
     public void autoFillIfLow() {
-        if (tankLink.getCurrentVolume() <= tankLink.getMinimumVolume() && !pumping.get()) {
+        if (waterTankCentralLink.getCurrentVolume() <= waterTankCentralLink.getMinimumVolume() && !pumping.get()) {
             new Thread(() -> {
                 log.debug("Starting water filling pump");
                 try {
                     pumping.set(true);
                     do {
-                        log.debug(tankLink.toString());
-                        tankLink.refillWater(inputVolumeThresholdInM3PerSecond);
+                        log.debug(waterTankCentralLink.toString());
+                        waterTankCentralLink.refillWater(inputVolumeThresholdInM3PerSecond);
                         Thread.sleep(1000);
-                    } while (tankLink.getCurrentVolume() < saveVolumeThreshold);
+                    } while (waterTankCentralLink.getCurrentVolume() < saveVolumeThreshold);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 } finally {

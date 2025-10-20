@@ -1,6 +1,6 @@
 package com.miumg.wtcenter.controller;
 
-import com.miumg.wtcenter.simulink.TankLink;
+import com.miumg.wtcenter.simulink.WaterTankCentralLink;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Controller;
 @RequiredArgsConstructor
 public class WebSocketController {
 
-    private final TankLink tankLink;
+    private final WaterTankCentralLink waterTankCentralLink;
 
     @MessageMapping("/tank/{tankId}")
     @SendTo("/topic/{tankId}")
-    public TankLink tank(@DestinationVariable String tankId){
-        return tankLink;
+    public WaterTankCentralLink tank(@DestinationVariable String tankId){
+        return waterTankCentralLink;
     }
 
 }

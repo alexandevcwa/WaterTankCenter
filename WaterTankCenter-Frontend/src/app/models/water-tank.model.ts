@@ -1,8 +1,11 @@
 export interface WaterTank {
-  id: string;
-  currentVolume: number;
-  maximumVolume: number;
+  id: number;
   minimumVolume: number;
+  maximumVolume: number;
+  currentVolume: number;
+  currentPercentage: number;
   radio: number;
-  hight: number;
+  height: number;
+  diameter: number;
+  filling: boolean;
 }

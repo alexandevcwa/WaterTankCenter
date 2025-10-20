@@ -58,7 +58,7 @@ export class WaterLevelGraphComponent {
   }
 
   listenerTankStatus() {
-    this.tankService.getTankStatus().subscribe((message: WaterTank | null) => {
+    this.tankService.getWaterTankCentral().subscribe((message: WaterTank | null) => {
       if (!message) {
         return;
       }

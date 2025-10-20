@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TankService } from '../../services/tank.service';
 import { WaterTank } from '../../models/water-tank.model';
-import { id } from '@cds/core/internal';
 
 @Component({
   selector: 'app-water-tank',
@@ -27,18 +26,21 @@ export class WaterTankComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.listenerTankStatus();
     const temp: WaterTank = {
-      id: '',
+      id: 0,
       maximumVolume: 0,
       minimumVolume: 0,
       currentVolume: 0,
       radio: 0,
-      hight: 0,
+      height: 0,
+      currentPercentage: 0.0,
+      filling: true,
+      diameter: 0.0
     };
     this.waterTank = temp;
   }
 
   listenerTankStatus() {
-    this.tankService.getTankStatus().subscribe((message: WaterTank | null) => {
+    this.tankService.getWaterTankCentral().subscribe((message: WaterTank | null) => {
       if (!message) return;
 
       if (this.waterTank.currentVolume === message.currentVolume) {

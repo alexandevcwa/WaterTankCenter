@@ -92,7 +92,7 @@ public class WaterTankHouseLink implements Runnable {
             houseDto.getWaterTank().setCurrentVolume(volumenAcumulado);
             houseDto.getWaterTank().setCurrentPercentage(porcentaje);
 
-            messagingTemplate.convertAndSend("/topic/house-water-tank", houseDto.getWaterTank());
+            messagingTemplate.convertAndSend("/topic/house-water-tank", houseDto);
         }
     }
 }

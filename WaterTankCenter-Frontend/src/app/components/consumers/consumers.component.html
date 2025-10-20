@@ -1,1 +1,112 @@
-<p>consumers works!</p>
+<div class="consumers-section">
+  <div class="card">
+    <div class="card-header">
+      <h3>
+        <cds-icon shape="users"></cds-icon>
+        Consumidores Activos
+        <!-- <span class="badge badge-info"
+                >{{ totalActiveConsumers }} activos</span
+              > -->
+      </h3>
+    </div>
+    <div class="card-block">
+      <clr-datagrid>
+        <!-- Codigo de casa -->
+        <clr-dg-column [clrDgField]="'houseCode'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Código de Casa
+          </ng-container>
+        </clr-dg-column>
+        <!-- Metors cubicos maximos -->
+        <clr-dg-column [clrDgField]="'maxCubicMeters'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Max. (m³) Sisterna
+          </ng-container>
+        </clr-dg-column>
+        <!-- Metros cúbicos minimos -->
+        <clr-dg-column [clrDgField]="'minCubicMeters'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Min. (m³) Sisterna
+          </ng-container>
+        </clr-dg-column>
+        <!-- Metros cúbicos actuales -->
+        <clr-dg-column [clrDgField]="'curCubicMeters'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Actuales (m³) Sisterna
+          </ng-container>
+        </clr-dg-column>
+        <!-- Porcentraje actual -->
+        <clr-dg-column [clrDgField]="'curCubicMeters'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            % Actual Sisterna
+          </ng-container>
+        </clr-dg-column>
+
+        <!-- Filas -->
+        <clr-dg-row
+          *clrDgItems="
+            let consumer of (consumers$ | async) || [];
+            trackBy: trackById
+          "
+          [clrDgItem]="consumer"
+        >
+          <clr-dg-cell>
+            <strong>{{ consumer.id }}</strong>
+          </clr-dg-cell>
+
+          <clr-dg-cell>
+            <strong>{{ consumer.waterTank?.maximumVolume | number:'1.2-2' }}</strong>
+          </clr-dg-cell>
+
+          <clr-dg-cell>
+            <strong>{{ consumer.waterTank?.minimumVolume | number:'1.2-2'}}</strong>
+          </clr-dg-cell>
+
+          <clr-dg-cell>
+            <strong>{{ consumer.waterTank?.currentVolume | number:'1.2-2'}}</strong>
+          </clr-dg-cell>
+
+          <clr-dg-cell>
+            <strong>{{ consumer.waterTank?.currentPercentage | number:'1.2-2'}}</strong>
+          </clr-dg-cell>
+        </clr-dg-row>
+
+        <!-- Footer con información -->
+        <clr-dg-footer>
+          <clr-dg-pagination #pagination [clrDgPageSize]="10">
+            <clr-dg-page-size [clrPageSizeOptions]="[10, 20, 50, 100]">
+              Consumidores por página
+            </clr-dg-page-size>
+            {{ pagination.firstItem + 1 }} - {{ pagination.lastItem + 1 }} de
+            {{ pagination.totalItems }} consumidores
+          </clr-dg-pagination>
+        </clr-dg-footer>
+      </clr-datagrid>
+
+      <!-- Resumen de consumo total -->
+      <!-- <div class="consumption-summary">
+              <div class="summary-item">
+                <cds-icon shape="users" size="lg"></cds-icon>
+                <div class="summary-content">
+                  <h4>{{ consumers.length }}</h4>
+                  <p>Total de casas</p>
+                </div>
+              </div>
+              <div class="summary-item">
+                <cds-icon shape="bolt" size="lg"></cds-icon>
+                <div class="summary-content">
+                  <h4>{{ totalActiveConsumers }}</h4>
+                  <p>Consumiendo ahora</p>
+                </div>
+              </div>
+              <div class="summary-item">
+                <cds-icon shape="storage" size="lg"></cds-icon>
+                <div class="summary-content">
+                  <h4>{{ getTotalCubicMeters() }} m³</h4>
+                  <p>Consumo total acumulado</p>
+                </div>
+              </div>
+            </div> -->
+    </div>
+  </div>
+</div>

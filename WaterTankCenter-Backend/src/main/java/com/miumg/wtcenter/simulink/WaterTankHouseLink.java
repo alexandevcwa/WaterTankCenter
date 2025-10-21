@@ -80,13 +80,17 @@ public class WaterTankHouseLink implements Runnable {
 
             // Caudal instantáneo desde la función (m^3/s)
             double qInstant = flowFunction.value(time);
+
             if (Double.isNaN(qInstant) || Double.isInfinite(qInstant) || qInstant <= 0.0) {
                 houseDto.getWaterTank().setFilling(false);
                 notifyClients();
                 continue;
             }
 
-            // Volumen bruto que fluiría en este paso (m^3)
+            // --- INTEGRACIÓN NUMÉRICA ---
+            // Se calcula el volumen transferido durante el intervalo de tiempo (Δt)
+            // Equivale a integrar el caudal en el tiempo:
+            //     ΔV = ∫ Q(t) dt ≈ Q(t) * Δt
             double rawIncrement = qInstant * DELTA_T;
 
             // Espacio disponible y agua en central
@@ -94,7 +98,7 @@ public class WaterTankHouseLink implements Runnable {
             double availableCentral = Math.max(0.0, waterTankCentralLink.getCurrentVolume());
 
             // Tomar la mínima de las tres cantidades
-            double actualIncrement = Math.min(rawIncrement, Math.min(remainingSpace, availableCentral));
+            double actualIncrement = Math.min(rawIncrement, Math.min(remainingSpace, availableCentral)); // V(t+Δt) = V(t) + Q(t)*Δt
             if (actualIncrement <= 0.0) {
                 houseDto.getWaterTank().setFilling(false);
                 notifyClients();
@@ -105,6 +109,7 @@ public class WaterTankHouseLink implements Runnable {
             waterTankCentralLink.consumeWater(actualIncrement);
 
             // Actualizar tanque de casa
+            // Volumen acumulado (integración discreta en el bucle)
             double newVolume = Math.max(0.0, Math.min(vMax, volume + actualIncrement));
             houseDto.getWaterTank().setCurrentVolume(newVolume);
             houseDto.getWaterTank().setCurrentPercentage((newVolume / vMax) * 100.0);
@@ -112,11 +117,6 @@ public class WaterTankHouseLink implements Runnable {
 
             // Actualizar variable local para las siguientes iteraciones
             volume = newVolume;
-
-            // Log para depuración. Ajusta nivel según necesites.
-            log.debug("t={}s dp={}Pa Q={}m3/s rawInc={}m3 actualInc={}m3 remSpace={}m3 centralAvail={}m3 houseVol={}m3",
-                    time, lastDpForDebug, qInstant, rawIncrement, actualIncrement, remainingSpace, availableCentral, volume);
-
             notifyClients();
         }
     }
@@ -207,19 +207,6 @@ public class WaterTankHouseLink implements Runnable {
         double centralPercent = (waterTankCentralLink.getCurrentVolume() /
                 waterTankCentralLink.getMaximumVolume()) * 100.0;
         return centralPercent > MIN_CENTRAL_LEVEL;
-    }
-
-    /**
-     * Actualiza volúmenes en DTO. NOTA: ahora el consumo del tanque central se hace antes de llamar a este método
-     * (el bucle principal controla cuánto consumir).
-     */
-    private double updateWaterVolumes(double increment, double vMax) {
-        double newVolume = Math.max(0.0,
-                Math.min(vMax, houseDto.getWaterTank().getCurrentVolume() + increment));
-        houseDto.getWaterTank().setCurrentVolume(newVolume);
-        houseDto.getWaterTank().setCurrentPercentage((newVolume / vMax) * 100.0);
-        houseDto.getWaterTank().setFilling(!(newVolume >= houseDto.getWaterTank().getSaveVolume()));
-        return newVolume;
     }
 
     /**

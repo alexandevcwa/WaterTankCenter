@@ -29,6 +29,12 @@
             Min. (m³) Sisterna
           </ng-container>
         </clr-dg-column>
+        <!-- Metros cúbicos seguros -->
+        <clr-dg-column [clrDgField]="'sevCubicMeters'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Seguro (m³) Sisterna
+          </ng-container>
+        </clr-dg-column>
         <!-- Metros cúbicos actuales -->
         <clr-dg-column [clrDgField]="'curCubicMeters'">
           <ng-container *clrDgHideableColumn="{ hidden: false }">
@@ -39,6 +45,12 @@
         <clr-dg-column [clrDgField]="'curCubicMeters'">
           <ng-container *clrDgHideableColumn="{ hidden: false }">
             % Actual Sisterna
+          </ng-container>
+        </clr-dg-column>
+        <!-- Porcentraje actual -->
+        <clr-dg-column [clrDgField]="'curCubicMeters'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Estado de Bomba
           </ng-container>
         </clr-dg-column>
 
@@ -55,19 +67,43 @@
           </clr-dg-cell>
 
           <clr-dg-cell>
-            <strong>{{ consumer.waterTank?.maximumVolume | number:'1.2-2' }}</strong>
+            <strong>{{
+              consumer.waterTank?.maximumVolume | number : "1.2-2"
+            }}</strong>
           </clr-dg-cell>
 
           <clr-dg-cell>
-            <strong>{{ consumer.waterTank?.minimumVolume | number:'1.2-2'}}</strong>
+            <strong>{{
+              consumer.waterTank?.minimumVolume | number : "1.2-2"
+            }}</strong>
           </clr-dg-cell>
 
           <clr-dg-cell>
-            <strong>{{ consumer.waterTank?.currentVolume | number:'1.2-2'}}</strong>
+            <strong>{{
+              consumer.waterTank?.saveVolume | number : "1.2-2"
+            }}</strong>
           </clr-dg-cell>
 
           <clr-dg-cell>
-            <strong>{{ consumer.waterTank?.currentPercentage | number:'1.2-2'}}</strong>
+            <strong>{{
+              consumer.waterTank?.currentVolume | number : "1.2-2"
+            }}</strong>
+          </clr-dg-cell>
+
+          <clr-dg-cell>
+            <strong>{{
+              consumer.waterTank?.currentPercentage | number : "1.2-2"
+            }} %</strong>
+          </clr-dg-cell>
+
+          <clr-dg-cell>
+            <span class="badge" [ngClass]="consumer.waterTank?.filling ? 'badge-success' : 'badge-warning'">
+              {{ consumer.waterTank?.filling ? "Consumiendo" : "Apagada" }}
+              <span class="clr-sr-only">
+                Bomba de agua
+                {{ consumer.waterTank?.filling ? "encendida" : "apagada" }}
+              </span>
+            </span>
           </clr-dg-cell>
         </clr-dg-row>
 

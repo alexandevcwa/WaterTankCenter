@@ -28,6 +28,7 @@ export class WaterTankComponent implements OnInit, OnDestroy {
     const temp: WaterTank = {
       id: 0,
       maximumVolume: 0,
+      saveVolume: 0,
       minimumVolume: 0,
       currentVolume: 0,
       radio: 0,

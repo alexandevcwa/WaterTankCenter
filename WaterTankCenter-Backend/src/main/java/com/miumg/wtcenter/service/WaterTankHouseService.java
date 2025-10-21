@@ -1,6 +1,8 @@
 package com.miumg.wtcenter.service;
 
-import com.miumg.wtcenter.dto.HouseDto;
+import com.miumg.wtcenter.common.Pipes;
+import com.miumg.wtcenter.common.UnitsConverter;
+import com.miumg.wtcenter.dto.*;
 import com.miumg.wtcenter.simulink.WaterTankCentralLink;
 import com.miumg.wtcenter.simulink.WaterTankHouseLink;
 import lombok.RequiredArgsConstructor;
@@ -18,11 +20,21 @@ public class WaterTankHouseService {
     private final SimpMessagingTemplate messagingTemplate;
     private final WaterTankCentralLink wtcl;
 
-    private static int housesRegistered = 0;
+    private static int registered = 0;
 
-    public void addHouse(HouseDto houseDto) {
-        housesRegistered++;
-        houseDto.setId(housesRegistered);
-        executor.submit(new WaterTankHouseLink(houseDto, wtcl, messagingTemplate));
+    public void addHouse(WaterTankRequestDto request) {
+        double pipeDiameter = UnitsConverter.fromInchesToMeters(Pipes.pipes.get(request.pipeDiameter()));
+        WaterPipeDto pipe = new WaterPipeDto(pipeDiameter, request.pipeLength());
+
+        WaterTankDto tank = WaterTankDto.builder()
+                .height(request.tankHeight())
+                .diameter(request.tankDiameter())
+                .build();
+
+        registered++;
+
+        HouseDto house = new HouseDto(registered, tank, pipe);
+
+        executor.submit(new WaterTankHouseLink(house, wtcl, messagingTemplate));
     }
 }

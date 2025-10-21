@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ClarityModule } from '@clr/angular';
 
 @Component({
@@ -9,5 +9,12 @@ import { ClarityModule } from '@clr/angular';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+
   title = 'Sistema de Monitoreo de Tanque de Agua';
+  @Output() opened = new EventEmitter<void>();
+
+  openSideBar() : void{
+    console.log("llllllllllllllllllllllllllllllllllllllll")
+    this.opened.emit();
+  }
 }

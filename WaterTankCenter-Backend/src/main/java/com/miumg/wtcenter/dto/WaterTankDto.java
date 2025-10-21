@@ -19,6 +19,11 @@ public class WaterTankDto {
     double maximumVolume;
 
     /**
+     * Volumen to save in cubic meters.
+     */
+    double saveVolume;
+
+    /**
      * Current volumen in cubic meters.
      */
     double currentVolume;

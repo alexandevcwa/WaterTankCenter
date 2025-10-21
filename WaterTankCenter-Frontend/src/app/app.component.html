@@ -1,7 +1,6 @@
 <div class="main-container">
   <!-- Header -->
-  <app-header />
-
+  <app-header (opened)="openSideBar()"/>
   <!-- Content Area -->
   <div class="content-container">
     <div class="content-area">
@@ -18,4 +17,5 @@
       </div>
     </div>
   </div>
+  <app-house-form [opened]="opened" (closed)="closeSideBar()"></app-house-form>
 </div>

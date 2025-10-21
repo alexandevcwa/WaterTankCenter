@@ -34,6 +34,14 @@ public class WaterPipeDto {
     @Getter @Setter
     private double frictionFactor = 0.03;
 
+    @Setter
+    @Getter
+    private String pipeType;
+
+    @Setter
+    @Getter
+    private String pipeTypeDescription;
+
 
     public WaterPipeDto(double diameter, double length) {
         this.diameter = diameter;

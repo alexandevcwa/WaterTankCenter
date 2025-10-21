@@ -3,4 +3,6 @@ export interface WaterPipeDto {
   leght: number;
   waterDensity: number;
   frictionFactor: number;
+  pipeType: string;
+  pipeTypeDescription: string;
 }

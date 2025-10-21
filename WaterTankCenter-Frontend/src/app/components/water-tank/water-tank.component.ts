@@ -50,10 +50,7 @@ export class WaterTankComponent implements OnInit, OnDestroy {
       }
 
       this.waterTank = message;
-      this.waterTank.maximumVolume = Math.floor(this.waterTank.maximumVolume);
-
-      const level = (message.currentVolume / message.maximumVolume) * 100;
-      this.waterLevel = Math.floor(level);
+      this.waterLevel = (message.currentVolume / message.maximumVolume) * 100;
     });
   }
 

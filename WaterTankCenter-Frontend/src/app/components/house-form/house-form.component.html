@@ -1,0 +1,72 @@
+<!-- <button class="btn btn-primary" (click)="opened = true">Show side panel</button> -->
+
+<clr-side-panel
+  [(clrSidePanelOpen)]="opened"
+  [clrSidePanelStaticBackdrop]="true"
+  clrSidePanelSize="sm"
+>
+  <div class="side-panel-title">Crear Nueva Casa</div>
+  <!-- Formulario -->
+
+  <div class="side-panel-body">
+    <form [formGroup]="form" (ngSubmit)="onSave()" class="clr-form">
+      <!-- Alto del tanque de agua -->
+      <clr-input-container>
+        <label>Alto del Tanque</label>
+        <input clrInput formControlName="tankHeight" />
+        <clr-control-error *ngIf="form.get('tankHeight')?.hasError('required')">
+          El alto del tanque es requerido
+        </clr-control-error>
+        <clr-control-error *ngIf="form.get('tankHeight')?.hasError('min')">
+          El alto del tanque no puede ser a 0.1 m
+        </clr-control-error>
+      </clr-input-container>
+      <!-- Diametro del tanque de agua -->
+      <clr-input-container>
+        <label>Diametro del Tanque</label>
+        <input clrInput formControlName="tankDiameter" />
+        <clr-control-error
+          *ngIf="form.get('tankDiameter')?.hasError('required')"
+        >
+          El diametro del tanque es requerido
+        </clr-control-error>
+        <clr-control-error *ngIf="form.get('tankDiameter')?.hasError('min')">
+          El diametro del tanque no puede ser a 0.1 m
+        </clr-control-error>
+      </clr-input-container>
+      <!-- Longitud de tuberia pipeLength -->
+      <clr-input-container>
+        <label>Longitud de Contador a Tanque</label>
+        <input clrInput formControlName="pipeLength" />
+        <clr-control-error *ngIf="form.get('pipeLength')?.hasError('required')">
+          La longitud del contador al tanque es requerida
+        </clr-control-error>
+        <clr-control-error *ngIf="form.get('pipeLength')?.hasError('min')">
+          La longitud no puede ser a 0.1 m
+        </clr-control-error>
+      </clr-input-container>
+      <!-- Tipo de tuberia domestica -->
+      <clr-select-container>
+        <label>Tipo de Tubería</label>
+        <select clrSelect formControlName="pipeDiameter">
+          <option value="">Selecionar</option>
+          <option *ngFor="let item of dropdownData" [value]="item.key">
+            {{ item.value }}
+          </option>
+        </select>
+        <clr-control-error *ngIf="form.get('pipeDiameter')?.hasError('required')">
+          Selecione un tipo de tubería
+        </clr-control-error>
+      </clr-select-container>
+    </form>
+  </div>
+
+  <div class="side-panel-footer">
+    <button type="button" class="btn btn-outline" (click)="onCancel()">
+      Cancelar
+    </button>
+    <button type="button" class="btn btn-primary" (click)="onSave()">
+      Guardar
+    </button>
+  </div>
+</clr-side-panel>

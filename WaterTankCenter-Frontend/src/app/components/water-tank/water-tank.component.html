@@ -19,7 +19,7 @@
 
                     <!-- Porcentaje dentro del agua -->
                     <div class="water-percentage">
-                      {{ waterLevel }}%
+                      {{ waterLevel | number : "1.2-2"  }}%
                     </div>
                   </div>
 
@@ -41,20 +41,20 @@
                 <div class="tank-info">
                   <div class="info-item">
                     <span class="info-label">Volumen Actual:</span>
-                    <span class="info-value">{{ waterTank.currentVolume }} L</span>
+                    <span class="info-value">{{ waterTank.currentVolume | number : "1.2-2" }} (m³)</span>
                   </div>
                   <div class="info-item">
                     <span class="info-label">Capacidad Total:</span>
-                    <span class="info-value">{{ waterTank.maximumVolume }} L</span>
+                    <span class="info-value">{{ waterTank.maximumVolume | number : "1.2-2" }} (m³)</span>
                   </div>
 
                   <div class="info-item">
                     <span class="info-label">Radio:</span>
-                    <span class="info-value">{{ waterTank.radio }} m</span>
+                    <span class="info-value">{{ waterTank.radio | number : "1.2-2" }} (m)</span>
                   </div>
                   <div class="info-item">
                     <span class="info-label">Altura:</span>
-                    <span class="info-value">{{ waterTank.height }} m</span>
+                    <span class="info-value">{{ waterTank.height | number : "1.2-2" }} (m)</span>
                   </div>
                   <div class="info-item">
                     <span class="info-label">Estado:</span>

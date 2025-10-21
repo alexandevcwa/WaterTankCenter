@@ -1,6 +1,7 @@
 package com.miumg.wtcenter.service;
 
 import com.miumg.wtcenter.common.Pipes;
+import com.miumg.wtcenter.common.PipesText;
 import com.miumg.wtcenter.common.UnitsConverter;
 import com.miumg.wtcenter.dto.*;
 import com.miumg.wtcenter.simulink.WaterTankCentralLink;
@@ -25,6 +26,8 @@ public class WaterTankHouseService {
     public void addHouse(WaterTankRequestDto request) {
         double pipeDiameter = UnitsConverter.fromInchesToMeters(Pipes.pipes.get(request.pipeDiameter()));
         WaterPipeDto pipe = new WaterPipeDto(pipeDiameter, request.pipeLength());
+        pipe.setPipeType(request.pipeDiameter());
+        pipe.setPipeTypeDescription(PipesText.valueOf(request.pipeDiameter()).toString());
 
         WaterTankDto tank = WaterTankDto.builder()
                 .height(request.tankHeight())

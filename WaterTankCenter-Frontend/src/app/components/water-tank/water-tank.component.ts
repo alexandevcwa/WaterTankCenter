@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TankService } from '../../services/tank.service';
 import { WaterTank } from '../../models/water-tank.model';
+import { TimeFormatPipe } from "../../pipes/time-format.pipe";
 
 @Component({
   selector: 'app-water-tank',
-  imports: [CommonModule],
+  imports: [CommonModule, TimeFormatPipe],
   templateUrl: './water-tank.component.html',
   styleUrl: './water-tank.component.css',
 })
@@ -35,7 +36,9 @@ export class WaterTankComponent implements OnInit, OnDestroy {
       height: 0,
       currentPercentage: 0.0,
       filling: true,
-      diameter: 0.0
+      diameter: 0.0,
+      consumo: 0,
+      tiempoSegundos: 0
     };
     this.waterTank = temp;
   }

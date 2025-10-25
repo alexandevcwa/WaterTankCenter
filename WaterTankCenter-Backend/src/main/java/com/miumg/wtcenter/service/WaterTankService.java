@@ -39,6 +39,7 @@ public class WaterTankService {
                         .currentVolume(wtcl.getCurrentVolume())
                         .radio(wtcl.getRadio())
                         .height(wtcl.getHight())
+                        .consumo(WaterTankCentralLink.getConsumo())
                         .build()
         );
 

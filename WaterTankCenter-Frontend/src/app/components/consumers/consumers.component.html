@@ -3,7 +3,9 @@
     <div class="card-header">
       <h3>
         Consumidores Activos
-        <span class="badge badge-info">{{ consumers$.lift.length }} activos</span>
+        <span class="badge badge-info"
+          >{{ consumers$.lift.length }} activos</span
+        >
       </h3>
     </div>
     <div class="card-block">
@@ -22,13 +24,13 @@
         </clr-dg-column>
         <!-- Metros cúbicos minimos -->
         <clr-dg-column [clrDgField]="'minCubicMeters'">
-          <ng-container *clrDgHideableColumn="{ hidden: false }">
+          <ng-container *clrDgHideableColumn="{ hidden: true }">
             Min. (m³)
           </ng-container>
         </clr-dg-column>
         <!-- Metros cúbicos seguros -->
         <clr-dg-column [clrDgField]="'sevCubicMeters'">
-          <ng-container *clrDgHideableColumn="{ hidden: false }">
+          <ng-container *clrDgHideableColumn="{ hidden: true }">
             Seguro (m³)
           </ng-container>
         </clr-dg-column>
@@ -50,6 +52,12 @@
             Tuberia
           </ng-container>
         </clr-dg-column>
+        <!-- Tiempo -->
+        <clr-dg-column [clrDgField]="'time'">
+          <ng-container *clrDgHideableColumn="{ hidden: false }">
+            Tiempo
+          </ng-container>
+        </clr-dg-column>
         <!-- Estado -->
         <clr-dg-column [clrDgField]="'status'">
           <ng-container *clrDgHideableColumn="{ hidden: false }">
@@ -65,10 +73,11 @@
           "
           [clrDgItem]="consumer"
         >
+          <!-- Codigo de Casa -->
           <clr-dg-cell>
             <strong>{{ consumer.id }}</strong>
           </clr-dg-cell>
-
+          <!-- Maximo -->
           <clr-dg-cell>
             <strong
               >{{
@@ -77,7 +86,7 @@
               (m³)</strong
             >
           </clr-dg-cell>
-
+          <!-- Minimo -->
           <clr-dg-cell>
             <strong
               >{{
@@ -86,7 +95,7 @@
               (m³)</strong
             >
           </clr-dg-cell>
-
+          <!-- Seguro -->
           <clr-dg-cell>
             <strong
               >{{
@@ -95,7 +104,7 @@
               (m³)</strong
             >
           </clr-dg-cell>
-
+          <!-- Actual -->
           <clr-dg-cell>
             <strong
               >{{
@@ -104,7 +113,7 @@
               (m³)</strong
             >
           </clr-dg-cell>
-
+          <!-- Porcentaje Actual -->
           <clr-dg-cell>
             <strong
               >{{
@@ -113,11 +122,20 @@
               %</strong
             >
           </clr-dg-cell>
-
+          <!-- Tipo de Tuberia -->
           <clr-dg-cell>
             <strong>{{ consumer.waterPipe.pipeType }}</strong>
           </clr-dg-cell>
-
+          <!-- Tiempo -->
+          <clr-dg-cell>
+            <strong>{{
+              (consumer.waterTank?.tiempoSegundos != null
+                ? consumer.waterTank!.tiempoSegundos
+                : 0
+              ) | timeFormat
+            }}</strong>
+          </clr-dg-cell>
+          <!-- Estado de Bomba -->
           <clr-dg-cell>
             <span
               class="badge"

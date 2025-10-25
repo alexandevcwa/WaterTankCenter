@@ -1,9 +1,9 @@
 waterPump:
-  inputVolumeThresholdInM3PerSecond: 3.0
+  inputVolumeThresholdInM3PerSecond: 0.5
 
 water-tank:
-  radio: 5
-  hight: 6
+  radio: 2
+  hight: 4
   min-volume-in-percent: 25.0
 
 spring:

@@ -54,4 +54,11 @@ public class WaterTankDto {
      * Tag that indicated if the tank is filling.
      */
     boolean isFilling;
+
+    /**
+     * Consumo actual del tanque
+     */
+    double consumo;
+
+    double tiempoSegundos;
 }

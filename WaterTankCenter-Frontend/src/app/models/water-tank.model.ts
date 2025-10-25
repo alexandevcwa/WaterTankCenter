@@ -9,4 +9,6 @@ export interface WaterTank {
   height: number;
   diameter: number;
   filling: boolean;
+  consumo: number;
+  tiempoSegundos: number;
 }

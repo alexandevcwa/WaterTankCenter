@@ -37,6 +37,9 @@ public class WaterTankCentralLink {
     @Getter
     private final double hight;
 
+    @Getter
+    private static double consumo;
+
 
     /**
      * Constructs a new TankLink instance with the specified maximum volume and minimum percentage of the volume.
@@ -53,7 +56,7 @@ public class WaterTankCentralLink {
             throw new RuntimeException("Minimum percentage must be between 0 and 100");
         this.radio  = radio;
         this.hight = hight;
-        this.maximumVolume = (Math.PI * radio) * hight;
+        this.maximumVolume = (Math.PI * Math.pow(radio,2)) * hight;
         this.minimumVolume = minimumPercentage;
         currentVolume = 0;
     }
@@ -76,6 +79,7 @@ public class WaterTankCentralLink {
     @Synchronized
     public void consumeWater(double consumedVolume) {
         currentVolume = currentVolume - consumedVolume;
+        consumo = consumo + consumedVolume;
     }
 
     /**

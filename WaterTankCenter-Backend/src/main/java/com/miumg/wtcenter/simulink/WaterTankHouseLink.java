@@ -77,7 +77,7 @@ public class WaterTankHouseLink implements Runnable {
             }
 
             time += DELTA_T;
-
+            houseDto.getWaterTank().setTiempoSegundos(time);
             // Caudal instantáneo desde la función (m^3/s)
             double qInstant = flowFunction.value(time);
 
@@ -86,6 +86,7 @@ public class WaterTankHouseLink implements Runnable {
                 notifyClients();
                 continue;
             }
+
 
             // --- INTEGRACIÓN NUMÉRICA ---
             // Se calcula el volumen transferido durante el intervalo de tiempo (Δt)

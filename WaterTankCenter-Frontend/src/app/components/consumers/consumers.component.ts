@@ -9,10 +9,11 @@ import { TankService } from '../../services/tank.service';
 import { HouseDto } from '../../models/house.mode';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { TimeFormatPipe } from "../../pipes/time-format.pipe";
 
 @Component({
   selector: 'app-consumers',
-  imports: [ClrIconModule, ClrDatagridModule, CommonModule],
+  imports: [ClrIconModule, ClrDatagridModule, CommonModule, TimeFormatPipe],
   templateUrl: './consumers.component.html',
   styleUrl: './consumers.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
